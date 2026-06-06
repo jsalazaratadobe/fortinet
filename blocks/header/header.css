@@ -89,6 +89,8 @@ header {
   background: #fff;
   border-bottom: 1px solid #e5e5e5;
   position: relative;
+  color-scheme: light;
+  color: #333;
 }
 
 .nav-main-inner {
@@ -162,11 +164,18 @@ header {
   position: relative;
 }
 
-.nav-item-link:any-link {
+.nav-item-link:any-link,
+.nav-item-link.button:any-link {
   display: block;
   padding: 18px 16px;
   color: #333;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
   text-decoration: none;
+  text-transform: none;
+  letter-spacing: normal;
   font-size: 14px;
   font-weight: 500;
   white-space: nowrap;
@@ -174,10 +183,15 @@ header {
 }
 
 .nav-item-link:any-link:hover,
-.nav-item.open .nav-item-link:any-link {
+.nav-item.open .nav-item-link:any-link,
+.nav-item-link.button:any-link:hover,
+.nav-item.open .nav-item-link.button:any-link {
   color: #333;
+  background: none;
   text-decoration: none;
   font-weight: 700;
+  box-shadow: none;
+  border: none;
 }
 
 /* Right CTA (FortiGuard) */
