@@ -182,11 +182,214 @@ function decorateDefault(block) {
   block.replaceChildren(ul);
 }
 
+function decorateCarousel(block) {
+  decorateDefault(block);
+
+  const ul = block.querySelector('ul');
+  if (!ul) return;
+
+  ul.classList.add('cards-carousel-track');
+
+  const nav = createTag('div', { class: 'cards-carousel-nav' });
+  const prevBtn = createTag('button', { class: 'cards-carousel-prev', 'aria-label': 'Previous' });
+  prevBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>';
+  const progress = createTag('div', { class: 'cards-carousel-progress' });
+  const progressBar = createTag('div', { class: 'cards-carousel-progress-bar' });
+  progress.append(progressBar);
+  const nextBtn = createTag('button', { class: 'cards-carousel-next', 'aria-label': 'Next' });
+  nextBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
+  nav.append(prevBtn, progress, nextBtn);
+  block.append(nav);
+
+  function scroll(direction) {
+    const card = ul.querySelector('li');
+    if (!card) return;
+    const scrollAmount = card.offsetWidth + parseInt(getComputedStyle(ul).gap, 10) || 24;
+    ul.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+  }
+
+  prevBtn.addEventListener('click', () => scroll(-1));
+  nextBtn.addEventListener('click', () => scroll(1));
+
+  function updateNav() {
+    prevBtn.disabled = ul.scrollLeft <= 0;
+    nextBtn.disabled = ul.scrollLeft + ul.clientWidth >= ul.scrollWidth - 1;
+    const maxScroll = ul.scrollWidth - ul.clientWidth;
+    const pct = maxScroll > 0 ? ((ul.scrollLeft + ul.clientWidth) / ul.scrollWidth) * 100 : 100;
+    progressBar.style.width = `${pct}%`;
+  }
+
+  ul.addEventListener('scroll', updateNav);
+  new ResizeObserver(updateNav).observe(ul);
+  updateNav();
+}
+
+function decorateTestimonial(block) {
+  const stories = [...block.children];
+  const container = createTag('div', { class: 'testimonial-container' });
+
+  const slides = stories.map((row) => {
+    const slide = createTag('div', { class: 'testimonial-slide' });
+    const cols = [...row.children];
+    const textCol = cols[0];
+
+    const title = textCol?.querySelector('strong');
+    const paragraphs = textCol?.querySelectorAll('p') || [];
+    const quoteP = [...paragraphs].find((p) => p.querySelector('em') || (p.textContent.startsWith('"') && !p.querySelector('a') && !p.querySelector('strong')));
+    const attrP = [...paragraphs].find((p) => p.querySelector('em'));
+    const linkP = [...paragraphs].find((p) => p.querySelector('a'));
+
+    const content = createTag('div', { class: 'testimonial-content' });
+    if (title) {
+      const h3 = createTag('h3');
+      h3.textContent = title.textContent;
+      content.append(h3);
+    }
+    if (linkP) {
+      const cta = createTag('div', { class: 'testimonial-cta' });
+      const a = linkP.querySelector('a');
+      if (a) {
+        const link = createTag('a', { href: a.href, class: 'testimonial-link' });
+        link.textContent = a.textContent;
+        cta.append(link);
+      }
+      content.append(cta);
+    }
+
+    const quote = createTag('div', { class: 'testimonial-quote' });
+    if (quoteP) {
+      const q = createTag('p');
+      q.textContent = quoteP.textContent;
+      quote.append(q);
+    }
+    if (attrP) {
+      const attr = createTag('p', { class: 'testimonial-attribution' });
+      attr.innerHTML = attrP.innerHTML;
+      quote.append(attr);
+    }
+    content.append(quote);
+    const imgCol = cols[1];
+    const imgPanel = createTag('div', { class: 'testimonial-image' });
+    const picture = imgCol?.querySelector('picture');
+    if (picture) {
+      imgPanel.append(picture);
+    }
+    slide.append(content, imgPanel);
+
+    return slide;
+  });
+
+  slides.forEach((slide, i) => {
+    if (i === 0) slide.classList.add('active');
+    container.append(slide);
+  });
+
+  const logos = createTag('div', { class: 'testimonial-logos' });
+  stories.forEach((_, i) => {
+    const btn = createTag('button', { class: 'testimonial-logo-btn', 'aria-label': `Story ${i + 1}` });
+    if (i === 0) btn.classList.add('active');
+    btn.addEventListener('click', () => {
+      container.querySelector('.testimonial-slide.active')?.classList.remove('active');
+      logos.querySelector('.testimonial-logo-btn.active')?.classList.remove('active');
+      slides[i].classList.add('active');
+      btn.classList.add('active');
+    });
+    logos.append(btn);
+  });
+
+  const cta = createTag('div', { class: 'testimonial-footer' });
+  const exploreBtn = createTag('a', { href: '/customers', class: 'button primary' });
+  exploreBtn.textContent = 'Explore All Customer Stories';
+  cta.append(exploreBtn);
+
+  block.replaceChildren(container, logos, cta);
+}
+
+function decorateFlip(block) {
+  const ul = createTag('ul');
+
+  [...block.children].forEach((row) => {
+    const li = createTag('li');
+    const cols = [...row.children];
+    const imgCol = cols.find((c) => c.querySelector('picture'));
+    const textCol = cols.find((c) => c.querySelector('h3'));
+
+    const front = createTag('div', { class: 'cards-flip-front' });
+    const back = createTag('div', { class: 'cards-flip-back' });
+
+    if (imgCol) {
+      const picture = imgCol.querySelector('picture');
+      if (picture) front.append(picture);
+    }
+
+    const h3 = textCol?.querySelector('h3');
+    if (h3) {
+      const title = createTag('h3');
+      title.textContent = h3.textContent;
+      front.append(title);
+
+      const backTitle = createTag('h3');
+      backTitle.textContent = h3.textContent;
+      back.append(backTitle);
+    }
+
+    const desc = textCol?.querySelector('p');
+    if (desc) back.append(desc);
+
+    const list = textCol?.querySelector('ul');
+    if (list) back.append(list);
+
+    li.append(front, back);
+    ul.append(li);
+  });
+
+  block.replaceChildren(ul);
+}
+
+function decorateHeader(block) {
+  const ul = createTag('ul');
+  const colors = ['#da291c', '#1a1a1a', '#1a6fbf', '#1a1a1a'];
+
+  [...block.children].forEach((row, idx) => {
+    const li = createTag('li');
+    const cols = [...row.children];
+
+    const headerCol = cols[0];
+    const bodyCol = cols[1];
+
+    const header = createTag('div', { class: 'cards-header-banner' });
+    header.style.backgroundColor = colors[idx % colors.length];
+    const headerText = headerCol?.querySelector('strong')?.textContent || headerCol?.textContent?.trim() || '';
+    header.textContent = headerText;
+    li.append(header);
+
+    const body = createTag('div', { class: 'cards-header-body' });
+    if (bodyCol) {
+      while (bodyCol.firstChild) body.append(bodyCol.firstChild);
+    }
+    li.append(body);
+
+    ul.append(li);
+  });
+
+  block.replaceChildren(ul);
+}
+
 export default async function decorate(block) {
   if (block.classList.contains('links')) {
     await decorateLinks(block);
   } else if (block.classList.contains('bento')) {
     decorateBento(block);
+  } else if (block.classList.contains('carousel')) {
+    decorateCarousel(block);
+  } else if (block.classList.contains('flip')) {
+    decorateFlip(block);
+  } else if (block.classList.contains('header')) {
+    decorateHeader(block);
+  } else if (block.classList.contains('testimonial')) {
+    decorateTestimonial(block);
+  } else if (block.classList.contains('stats') || block.classList.contains('dark')) {
+    decorateDefault(block);
   } else {
     decorateDefault(block);
   }

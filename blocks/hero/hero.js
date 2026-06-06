@@ -54,6 +54,10 @@ function decorateCarousel(block, slides) {
 
     const picture = slide.querySelector('picture');
     if (picture) {
+      if (i === 0) {
+        const img = picture.querySelector('img');
+        if (img) img.loading = 'eager';
+      }
       const imgWrapper = picture.closest('div');
       if (imgWrapper && imgWrapper.parentElement === slide) {
         imgWrapper.classList.add('hero-slide-bg');
@@ -61,7 +65,16 @@ function decorateCarousel(block, slides) {
     }
 
     const textCells = [...slide.children].filter((c) => !c.querySelector('picture'));
-    textCells.forEach((cell) => cell.classList.add('hero-slide-content'));
+    textCells.forEach((cell) => {
+      cell.classList.add('hero-slide-content');
+      const buttons = cell.querySelectorAll('p.button-container');
+      if (buttons.length > 1) {
+        const btnRow = document.createElement('div');
+        btnRow.className = 'hero-slide-buttons';
+        buttons.forEach((btn) => btnRow.append(btn));
+        cell.append(btnRow);
+      }
+    });
 
     track.append(slide);
   });
