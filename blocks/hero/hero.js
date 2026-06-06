@@ -1,20 +1,23 @@
 /** @param {Element} block The hero block element */
 export default function decorate(block) {
+  const slides = [...block.children];
+
+  if (slides.length <= 1) {
+    decorateSingle(block);
+    return;
+  }
+
+  decorateCarousel(block, slides);
+}
+
+function decorateSingle(block) {
   const pictures = block.querySelectorAll('picture');
 
   if (pictures.length >= 2) {
-    // Dual-image hero: first = light, second = dark
     const lightDiv = pictures[0].closest('.hero > div');
     const darkDiv = pictures[1].closest('.hero > div');
     if (lightDiv) lightDiv.classList.add('hero-img-light');
     if (darkDiv) darkDiv.classList.add('hero-img-dark');
-
-    // In dark mode, move the dark image first so waitForFirstImage
-    // eager-loads the visible (LCP) image rather than the hidden one.
-    const isDark = document.body.classList.contains('dark-scheme');
-    if (isDark && darkDiv && lightDiv) {
-      lightDiv.parentElement.insertBefore(darkDiv, lightDiv);
-    }
   } else if (pictures.length < 1) {
     block.classList.add('no-image');
   }
@@ -22,7 +25,6 @@ export default function decorate(block) {
   const h1 = block.querySelector('h1');
   if (!h1) return;
 
-  // Find the first <p> that appears before the <h1> in the DOM and mark it as a tagline
   const contentDiv = h1.closest('div');
   if (!contentDiv) return;
 
@@ -38,4 +40,70 @@ export default function decorate(block) {
       break;
     }
   }
+}
+
+function decorateCarousel(block, slides) {
+  block.classList.add('hero-carousel');
+
+  const track = document.createElement('div');
+  track.className = 'hero-carousel-track';
+
+  slides.forEach((slide, i) => {
+    slide.classList.add('hero-slide');
+    if (i === 0) slide.classList.add('active');
+
+    const picture = slide.querySelector('picture');
+    if (picture) {
+      const imgWrapper = picture.closest('div');
+      if (imgWrapper && imgWrapper.parentElement === slide) {
+        imgWrapper.classList.add('hero-slide-bg');
+      }
+    }
+
+    const textCells = [...slide.children].filter((c) => !c.querySelector('picture'));
+    textCells.forEach((cell) => cell.classList.add('hero-slide-content'));
+
+    track.append(slide);
+  });
+
+  block.textContent = '';
+  block.append(track);
+
+  const indicators = document.createElement('div');
+  indicators.className = 'hero-carousel-indicators';
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'hero-carousel-dot';
+    if (i === 0) dot.classList.add('active');
+    dot.setAttribute('aria-label', `Slide ${i + 1}`);
+    dot.addEventListener('click', () => goToSlide(i));
+    indicators.append(dot);
+  });
+  block.append(indicators);
+
+  let current = 0;
+  let interval = null;
+
+  function goToSlide(idx) {
+    slides[current].classList.remove('active');
+    indicators.children[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    indicators.children[current].classList.add('active');
+    resetInterval();
+  }
+
+  function next() {
+    goToSlide((current + 1) % slides.length);
+  }
+
+  function resetInterval() {
+    if (interval) clearInterval(interval);
+    interval = setInterval(next, 6000);
+  }
+
+  resetInterval();
+
+  block.addEventListener('mouseenter', () => { if (interval) clearInterval(interval); });
+  block.addEventListener('mouseleave', () => { resetInterval(); });
 }

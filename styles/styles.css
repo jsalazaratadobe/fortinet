@@ -1,3 +1,5 @@
+@import url('brand.css');
+
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -44,17 +46,17 @@
   /* color scheme */
   color-scheme: light dark;
 
-  /* heritage palette */
-  --color-rust: #a14f2b;
-  --color-gold: #c5a059;
-  --color-parchment: #f5f2ed;
-  --color-ink: #1a1a1a;
+  /* fortinet palette */
+  --color-rust: #da291c;
+  --color-gold: #ee3124;
+  --color-parchment: #f5f5f5;
+  --color-ink: #333;
 
-  /* heritage dark palette */
-  --color-obsidian: #060d0d;
-  --color-card-dark: #162121;
-  --color-rust-bright: #d16a3e;
-  --color-muted: #8b9a9a;
+  /* fortinet dark palette */
+  --color-obsidian: #0c1425;
+  --color-card-dark: #1a2a3a;
+  --color-rust-bright: #da291c;
+  --color-muted: #666;
 
   /* color tokens – grays and palette */
   --color-gray-100: #f1f1f1;
@@ -108,36 +110,36 @@
   /* semantic / named colors */
   --color-light: rgb(255 255 255);
   --color-dark: rgb(0 0 0);
-  --color-text: light-dark(var(--color-ink), var(--color-parchment));
-  --color-link: light-dark(var(--color-ink), var(--color-parchment));
+  --color-text: light-dark(var(--color-ink), #f5f5f5);
+  --color-link: light-dark(var(--color-ink), #f5f5f5);
   --color-link-hover: light-dark(var(--color-rust), var(--color-gold));
   --color-brand: var(--color-rust);
-  --color-accent: var(--color-gold);
+  --color-accent: var(--color-rust);
   --color-shaded: light-dark(var(--color-parchment), var(--color-card-dark));
 
   /* fonts */
-  --font-family: montserrat, "Trebuchet MS", sans-serif;
-  --font-family-serif: "EB Garamond", georgia, serif;
+  --font-family: "Inter", "Noto Sans JP", sans-serif;
+  --font-family-serif: "Inter", sans-serif;
   --font-family-mono: "JetBrains Mono", "Courier New", monospace;
   --body-font-family: var(--font-family);
   --heading-font-family: var(--font-family-serif);
 
   /* heading sizes */
-  --heading-font-size-xxl: 32.44px;
-  --heading-font-size-xl: 28.83px;
-  --heading-font-size-l: 25.63px;
-  --heading-font-size-m: 22.78px;
-  --heading-font-size-s: 20.25px;
-  --heading-font-size-xs: 18px;
-  --heading-font-size-xxs: 16px;
-  --heading-line-height: 1.15;
+  --heading-font-size-xxl: 36px;
+  --heading-font-size-xl: 28px;
+  --heading-font-size-l: 24px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
+  --heading-font-size-xxs: 14px;
+  --heading-line-height: 1.25;
 
   /* body sizes */
-  --body-font-size-xxxl: 25px;
-  --body-font-size-xxl: 22px;
-  --body-font-size-xl: 20px;
-  --body-font-size-l: 18px;
-  --body-font-size-m: 16px;
+  --body-font-size-xxxl: 22px;
+  --body-font-size-xxl: 20px;
+  --body-font-size-xl: 18px;
+  --body-font-size-l: 16px;
+  --body-font-size-m: 15px;
   --body-font-size-s: 14px;
   --body-font-size-xs: 12px;
   --body-line-height: 1.6;
@@ -147,26 +149,26 @@
   --header-height: var(--nav-height);
 
   /* boilerplate compatibility – map to design tokens */
-  --background-color: light-dark(var(--color-parchment), var(--color-obsidian));
+  --background-color: light-dark(#fff, var(--color-obsidian));
   --light-color: var(--color-shaded);
   --dark-color: var(--color-gray-500);
   --text-color: var(--color-text);
   --link-color: var(--color-link);
   --link-hover-color: var(--color-link-hover);
 
-  /* heritage border */
-  --border-heritage: 2px solid light-dark(rgb(161 79 43 / 20%), rgb(245 242 237 / 20%));
-  --border-radius-heritage: 24px;
+  /* fortinet border */
+  --border-heritage: 1px solid rgb(218 41 28 / 20%);
+  --border-radius-heritage: 4px;
 
-  /* gradient and glow tokens */
-  --gradient-brand: linear-gradient(135deg, var(--color-rust) 0%, var(--color-gold) 100%);
-  --gradient-brand-dark: linear-gradient(135deg, var(--color-rust-bright) 0%, var(--color-gold) 100%);
-  --shadow-glow-rust: 0 0 40px rgb(161 79 43 / 30%);
-  --shadow-glow-gold: 0 0 40px rgb(197 160 89 / 25%);
-  --shadow-lift-m: 0 20px 40px -8px rgb(0 0 0 / 15%);
-  --shadow-lift-l: 0 30px 60px -12px rgb(0 0 0 / 22%);
-  --shadow-card: 0 2px 8px rgb(0 0 0 / 5%), 0 1px 2px rgb(0 0 0 / 7%);
-  --shadow-card-dark: 0 2px 12px rgb(0 0 0 / 45%), 0 1px 4px rgb(0 0 0 / 30%);
+  /* gradient and shadow tokens */
+  --gradient-brand: linear-gradient(135deg, #da291c 0%, #ee3124 100%);
+  --gradient-brand-dark: linear-gradient(135deg, #da291c 0%, #b7211a 100%);
+  --shadow-glow-rust: 0 0 40px rgb(218 41 28 / 20%);
+  --shadow-glow-gold: 0 0 40px rgb(218 41 28 / 15%);
+  --shadow-lift-m: 0 10px 30px -5px rgb(0 0 0 / 12%);
+  --shadow-lift-l: 0 20px 50px -10px rgb(0 0 0 / 18%);
+  --shadow-card: 0 2px 8px rgb(0 0 0 / 8%), 0 1px 2px rgb(0 0 0 / 5%);
+  --shadow-card-dark: 0 4px 16px rgb(0 0 0 / 40%), 0 1px 4px rgb(0 0 0 / 25%);
 
   /* easing presets for consistent motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -186,8 +188,8 @@
 @media (width >= 600px) {
   :root,
   :host {
-    --heading-font-size-xxl: 44px;
-    --heading-font-size-xl: 36px;
+    --heading-font-size-xxl: 40px;
+    --heading-font-size-xl: 32px;
     --content-padding-inline: var(--space-l);
     --main-block-space: var(--space-xl);
     --section-block-space: var(--space-xl);
@@ -197,15 +199,15 @@
 @media (width >= 900px) {
   :root,
   :host {
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-    --heading-font-size-xxl: 64px;
-    --heading-font-size-xl: 48px;
-    --heading-font-size-l: 32px;
-    --heading-font-size-m: 24px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
+    --body-font-size-m: 16px;
+    --body-font-size-s: 15px;
+    --body-font-size-xs: 13px;
+    --heading-font-size-xxl: 45px;
+    --heading-font-size-xl: 40px;
+    --heading-font-size-l: 26px;
+    --heading-font-size-m: 20px;
+    --heading-font-size-s: 18px;
+    --heading-font-size-xs: 16px;
     --content-padding-inline: var(--space-xl);
     --section-block-space: var(--space-3xl);
   }
@@ -262,7 +264,7 @@ html {
 }
 
 ::selection {
-  background: light-dark(rgb(161 79 43 / 20%), rgb(197 160 89 / 30%));
+  background: rgb(218 41 28 / 20%);
   color: inherit;
 }
 
@@ -271,11 +273,6 @@ body {
   margin: 0;
   box-sizing: border-box;
   background-color: var(--background-color);
-  background-image:
-    radial-gradient(ellipse 80% 50% at 12% 8%,
-      light-dark(rgb(197 160 89 / 9%), rgb(197 160 89 / 4%)) 0%, transparent 60%),
-    radial-gradient(ellipse 55% 40% at 88% 82%,
-      light-dark(rgb(161 79 43 / 6%), rgb(161 79 43 / 3%)) 0%, transparent 50%);
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
@@ -316,7 +313,7 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.4em;
   font-family: var(--heading-font-family);
-  font-weight: 500;
+  font-weight: 700;
   line-height: var(--heading-line-height);
   scroll-margin: 40px;
 }
@@ -373,9 +370,9 @@ pre {
 
 :not(pre) > code {
   padding: 0.1em 0.35em;
-  background: rgb(161 79 43 / 10%);
+  background: rgb(218 41 28 / 8%);
   border-radius: 4px;
-  color: var(--color-rust);
+  color: #da291c;
 }
 
 pre {
@@ -393,17 +390,13 @@ strong {
 /* links */
 a:any-link {
   color: var(--link-color);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-  text-decoration-color: light-dark(rgb(26 26 26 / 30%), rgb(245 242 237 / 30%));
+  text-decoration: none;
   overflow-wrap: break-word;
 }
 
 a:hover {
   color: var(--link-hover-color);
   text-decoration: underline;
-  text-decoration-color: var(--link-hover-color);
 }
 
 /* buttons (AEM default content: links in standalone paragraphs) */
@@ -420,26 +413,25 @@ button.button {
   gap: var(--space-xs);
   max-width: 100%;
   margin: 0;
-  border: 1px solid light-dark(var(--color-rust), var(--color-rust-bright));
+  border: 2px solid #da291c;
   border-radius: 4px;
-  padding: 20px 50px;
+  padding: 12px 32px;
   font: inherit;
-  font-weight: 700;
-  font-size: 0.85rem;
-  line-height: 1.2;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  background-color: light-dark(var(--color-rust), var(--color-rust-bright));
-  background-image: linear-gradient(135deg, rgb(255 255 255 / 12%), rgb(0 0 0 / 8%));
-  color: var(--color-light);
+  letter-spacing: 1px;
+  background-color: #da291c;
+  color: #fff;
   cursor: pointer;
   overflow: hidden;
   position: relative;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: all 0.4s;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
 a.button:any-link::after,
