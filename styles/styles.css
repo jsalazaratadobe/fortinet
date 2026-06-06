@@ -339,7 +339,6 @@ h6 { font-size: var(--heading-font-size-xxs); }
   h5 { font-size: var(--heading-font-size-s); }
 }
 
-
 p,
 dl,
 ol,
@@ -387,6 +386,27 @@ strong {
   font-weight: 600;
 }
 
+/* Section headings – label + h2 pattern (Fortinet style) */
+.default-content-wrapper > p + h2 {
+  text-align: center;
+  margin-top: 0.3em;
+}
+
+.default-content-wrapper > h2:first-child,
+.default-content-wrapper > h2:only-child {
+  text-align: center;
+}
+
+.default-content-wrapper > p:first-child:has(+ h2) {
+  color: var(--color-rust, #da291c);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
 /* links */
 a:any-link {
   color: var(--link-color);
@@ -404,6 +424,10 @@ p.button-container {
   margin: var(--space-m) 0;
 }
 
+.default-content-wrapper > p.button-container {
+  text-align: center;
+}
+
 a.button:any-link,
 button.button {
   box-sizing: border-box;
@@ -414,7 +438,7 @@ button.button {
   max-width: 100%;
   margin: 0;
   border: 2px solid #da291c;
-  border-radius: 4px;
+  border-radius: 30px;
   padding: 12px 32px;
   font: inherit;
   font-weight: 600;

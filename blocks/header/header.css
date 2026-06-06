@@ -28,7 +28,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  height: 40px;
+  height: 36px;
   gap: 16px;
 }
 
@@ -38,7 +38,7 @@ header {
   gap: 8px;
 }
 
-.nav-util-links a {
+.nav-util-links a:any-link {
   color: #ccc;
   text-decoration: none;
   font-size: 11px;
@@ -46,21 +46,23 @@ header {
   letter-spacing: 0.5px;
 }
 
-.nav-util-links a:hover {
+.nav-util-links a:any-link:hover {
   color: #fff;
+  text-decoration: none;
 }
 
 .nav-util-sep {
-  color: #555;
-  font-size: 11px;
-  margin: 0 4px;
+  color: #666;
+  font-size: 12px;
+  margin: 0 8px;
+  user-select: none;
 }
 
 .nav-util-icons {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-left: 16px;
+  gap: 14px;
+  margin-left: 20px;
 }
 
 .nav-util-icons button {
@@ -71,6 +73,11 @@ header {
   padding: 4px;
   display: flex;
   align-items: center;
+}
+
+.nav-util-icons button svg {
+  width: 21px;
+  height: 21px;
 }
 
 .nav-util-icons button:hover {
@@ -100,9 +107,10 @@ header {
   margin-right: 32px;
 }
 
-.nav-brand a {
+.nav-brand a:any-link {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 .nav-brand img {
@@ -154,7 +162,7 @@ header {
   position: relative;
 }
 
-.nav-item-link {
+.nav-item-link:any-link {
   display: block;
   padding: 18px 16px;
   color: #333;
@@ -162,14 +170,14 @@ header {
   font-size: 14px;
   font-weight: 500;
   white-space: nowrap;
-  border-bottom: 3px solid transparent;
-  transition: border-color 0.2s;
+  transition: font-weight 0.15s;
 }
 
-.nav-item-link:hover,
-.nav-item.open .nav-item-link {
+.nav-item-link:any-link:hover,
+.nav-item.open .nav-item-link:any-link {
   color: #333;
-  border-bottom-color: #da291c;
+  text-decoration: none;
+  font-weight: 700;
 }
 
 /* Right CTA (FortiGuard) */
@@ -178,7 +186,7 @@ header {
   flex-shrink: 0;
 }
 
-.nav-fortiguard-link {
+.nav-fortiguard-link:any-link {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -199,8 +207,9 @@ header {
   color: #4caf50;
 }
 
-.nav-fortiguard-link:hover {
+.nav-fortiguard-link:any-link:hover {
   color: #da291c;
+  text-decoration: none;
 }
 
 /* Simple dropdown */
@@ -229,7 +238,7 @@ header {
   padding: 0;
 }
 
-.nav-dropdown li a {
+.nav-dropdown li a:any-link {
   display: block;
   padding: 8px 20px;
   color: #333;
@@ -237,9 +246,10 @@ header {
   font-size: 14px;
 }
 
-.nav-dropdown li a:hover {
+.nav-dropdown li a:any-link:hover {
   color: #da291c;
   background: #f9f9f9;
+  text-decoration: none;
 }
 
 /* Megamenu */
@@ -274,7 +284,7 @@ header {
   position: relative;
 }
 
-.nav-mega-sidebar-item a {
+.nav-mega-sidebar-item a:any-link {
   display: block;
   padding: 12px 24px;
   color: #333;
@@ -285,15 +295,16 @@ header {
   transition: all 0.15s;
 }
 
-.nav-mega-sidebar-item.active a,
-.nav-mega-sidebar-item a:hover {
+.nav-mega-sidebar-item.active a:any-link,
+.nav-mega-sidebar-item a:any-link:hover {
   color: #da291c;
   border-left-color: #da291c;
   background: #fafafa;
   font-weight: 500;
+  text-decoration: none;
 }
 
-.nav-mega-view-all {
+.nav-mega-view-all:any-link {
   display: block;
   padding: 16px 24px 12px;
   color: #666;
@@ -306,8 +317,9 @@ header {
   border-top: 1px solid #e5e5e5;
 }
 
-.nav-mega-view-all:hover {
+.nav-mega-view-all:any-link:hover {
   color: #da291c;
+  text-decoration: none;
 }
 
 /* Mega panels */
@@ -344,7 +356,7 @@ header {
   border-left: 3px solid #da291c;
 }
 
-.nav-mega-col a {
+.nav-mega-col a:any-link {
   display: block;
   padding: 6px 0;
   color: #444;
@@ -352,8 +364,9 @@ header {
   font-size: 14px;
 }
 
-.nav-mega-col a:hover {
+.nav-mega-col a:any-link:hover {
   color: #da291c;
+  text-decoration: none;
 }
 
 /* Mobile */
@@ -398,12 +411,10 @@ header {
   .nav-item-link {
     padding: 16px 20px;
     font-size: 15px;
-    border-bottom: none;
   }
 
   .nav-item-link:hover,
   .nav-item.open .nav-item-link {
-    border-bottom: none;
     color: #da291c;
   }
 
