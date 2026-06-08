@@ -87,10 +87,10 @@
 }
 
 .hero:not(.hero-carousel) a.button:any-link {
-  background-color: transparent;
+  background-color: #fff;
   border: 2px solid #fff;
   border-radius: 30px;
-  color: #fff;
+  color: #000;
   padding: 12px 28px;
   font-size: 13px;
   font-weight: 600;
