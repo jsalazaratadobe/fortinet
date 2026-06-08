@@ -1,5 +1,3 @@
-@import url('brand.css');
-
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -145,7 +143,7 @@
   --body-line-height: 1.6;
 
   /* nav / layout */
-  --nav-height: 64px;
+  --nav-height: 96px;
   --header-height: var(--nav-height);
 
   /* boilerplate compatibility – map to design tokens */
@@ -407,6 +405,14 @@ strong {
   margin-bottom: 0;
 }
 
+/* Left-aligned variant via section-metadata style: left */
+:is(main, article.article-body) > .section.left .default-content-wrapper > p + h2,
+:is(main, article.article-body) > .section.left .default-content-wrapper > h2:first-child,
+:is(main, article.article-body) > .section.left .default-content-wrapper > h2:only-child,
+:is(main, article.article-body) > .section.left .default-content-wrapper > p:first-child:has(+ h2) {
+  text-align: left;
+}
+
 /* links */
 a:any-link {
   color: var(--link-color);
@@ -426,6 +432,10 @@ p.button-container {
 
 .default-content-wrapper > p.button-container {
   text-align: center;
+}
+
+:is(main, article.article-body) > .section.left .default-content-wrapper > p.button-container {
+  text-align: left;
 }
 
 a.button:any-link,
@@ -548,6 +558,46 @@ button.button.secondary:focus-visible {
   box-shadow: 0 14px 30px light-dark(rgb(197 160 89 / 18%), rgb(197 160 89 / 22%));
 }
 
+/* Text-link variant – bold text with arrow, no button styling */
+a.button.text-link,
+button.button.text-link {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: normal;
+  box-shadow: none;
+}
+
+a.button.text-link::after,
+button.button.text-link::after {
+  content: ' \00BB';
+  position: static;
+  display: inline;
+  width: auto;
+  height: auto;
+  background: none;
+  transform: none;
+  border: none;
+  border-radius: 0;
+  inset: auto;
+}
+
+a.button.text-link:hover,
+a.button.text-link:focus-visible,
+button.button.text-link:hover,
+button.button.text-link:focus-visible {
+  background: none;
+  border: none;
+  color: #da291c;
+  box-shadow: none;
+  transform: none;
+}
+
 /* main content area – use design tokens for rhythm */
 main > div {
   margin: var(--main-block-space) var(--content-padding-inline);
@@ -638,7 +688,11 @@ main .section.highlight {
   border-bottom: 1px solid var(--color-gray-200);
 }
 
-:is(main, article.article-body) > .section.divider.center {
+:is(main, article.article-body) > .section.center {
+    text-align: center;
+}
+
+:is(main, article.article-body) > .section.center .default-content-wrapper > p.button-container {
     text-align: center;
 }
 

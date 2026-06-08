@@ -66,6 +66,15 @@ function replaceParagraphWithBlock(link, block) {
   }
 }
 
+function isVideoUrl(text) {
+  try {
+    const u = new URL(text);
+    return isYoutubeLink(u);
+  } catch {
+    return false;
+  }
+}
+
 function buildEmbedBlocks(main) {
   const youtubeVideos = main.querySelectorAll('a[href*="youtube.com"], a[href*="youtu.be"]');
   youtubeVideos.forEach((anchor) => {
@@ -80,7 +89,13 @@ function buildEmbedBlocks(main) {
     }
     if (!isYoutubeLink(url)) return;
 
+    const anchorText = anchor.textContent.trim();
+    const isLinkVariant = anchorText && !isVideoUrl(anchorText);
+
     const block = buildBlock('embed', [[anchor.cloneNode(true)]]);
+    if (isLinkVariant) {
+      block.classList.add('link');
+    }
     replaceParagraphWithBlock(anchor, block);
     decorateBlock(block);
   });
@@ -123,9 +138,34 @@ async function loadFragments(section) {
   await dynamicBlocks(main);
 }
 
+function buildAiDiagramBlock(main) {
+  const links = main.querySelectorAll('a[href*="/solutions/ai-security"]');
+  let aiLink = null;
+  links.forEach((l) => {
+    if (l.textContent.trim().toLowerCase().includes('fortiai')) aiLink = l;
+  });
+  if (!aiLink) return;
+  const section = aiLink.closest('div');
+  if (!section) return;
+  const picture = section.querySelector('picture');
+  if (!picture) return;
+
+  const block = buildBlock('ai-diagram', [
+    ['FortiAI–Protect', 'Defends against\nemerging threats\nand AI applications\nin real time'],
+    ['FortiAI–Assist', 'Transform security\nand network operations with\nintelligent automation\nand analytics'],
+    ['FortiAI–SecureAI', 'Secures AI models\nand systems, prevents\nLLM data leakage,\nand secures AI workloads'],
+    [aiLink.cloneNode(true)],
+  ]);
+  picture.replaceWith(block);
+  decorateBlock(block);
+  const linkP = aiLink.closest('p');
+  if (linkP) linkP.remove();
+}
+
 function buildAutoBlocks(main) {
   try {
     buildEmbedBlocks(main);
+    buildAiDiagramBlock(main);
   } catch (error) {
     console.error('Auto Blocking failed', error);
   }
@@ -167,8 +207,18 @@ async function inlineColorIcons(scope) {
   });
 }
 
+function decorateTextLinks(main) {
+  main.querySelectorAll('a.button').forEach((a) => {
+    const text = a.textContent.trim();
+    if (text.startsWith('Read More') || text.startsWith('View All') || text.endsWith('»')) {
+      a.classList.add('text-link');
+    }
+  });
+}
+
 export function decorateMain(main) {
   decorateButtons(main);
+  decorateTextLinks(main);
   decorateIcons(main);
   inlineColorIcons(main);
   buildAutoBlocks(main);
