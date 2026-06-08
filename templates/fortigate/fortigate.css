@@ -1,216 +1,39 @@
-/* FortiGate product page template
-   Design tokens extracted from fortinet.com/support/.../fortigate-security-bundles
-   Scoped to body.fortigate so it does not affect the index or other pages */
+/* stylelint-disable no-descending-specificity */
 
-body.fortigate {
-  --fg-green: #019062;
-  --fg-green-dark: #2d855f;
-  --fg-text-dark: #323e48;
-  --fg-text-body: #333;
-  --fg-text-muted: #646464;
-  --fg-bg-light: #fbfbfb;
-  --fg-bg-gray: #cac8c8;
-  --fg-border-light: rgb(230 230 230 / 25%);
-  --fg-shadow-card: 0 2px 6px rgb(0 0 0 / 25%);
-  --fg-radius-pill: 30px;
-  --fg-radius-sm: 5px;
-  --fg-section-padding: 40px 0;
-  --fg-content-max-width: 1240px;
-  --fg-tab-border-active: 5px solid #464646;
-}
+/* FortiGate template – gray eyebrow, red underline on h2 */
 
-body.fortigate main {
-  text-align: left;
-}
-
-body.fortigate main > .section {
-  padding: 40px 0;
-}
-
-/* Hero no-image override – remove dark bg, left-align content */
-body.fortigate .hero.no-image {
-  background-color: var(--fg-green);
-}
-
-body.fortigate .hero-text > div {
-  text-align: left;
-  align-items: flex-start;
-}
-
-body.fortigate main > .section > div {
-  max-width: var(--fg-content-max-width);
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-/* Body text */
-body.fortigate p {
-  font-size: 15px;
-  color: var(--fg-text-body);
-  line-height: 1.4;
-}
-
-/* Section headings – red underline bar */
-body.fortigate h2 {
-  font-size: 32px;
-  font-weight: 600;
-  color: var(--fg-text-dark);
-  line-height: 40px;
-  padding-bottom: 17px;
-  position: relative;
-}
-
-body.fortigate h2::after {
-  content: "";
-  display: block;
-  width: 118px;
-  height: 7px;
-  background-color: #da291c;
-  margin-top: 10px;
-}
-
-body.fortigate h3 {
-  font-size: 24px;
-  font-weight: 600;
-  color: var(--fg-text-dark);
-  line-height: 32px;
-}
-
-/* Eyebrow text (first p before h2) */
 body.fortigate .default-content-wrapper > p:first-child:has(+ h2) {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--fg-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 8px;
+  color: #555;
 }
 
-/* Force left alignment on headings, eyebrows, buttons (override global center) */
-body.fortigate .default-content-wrapper > p + h2,
-body.fortigate .default-content-wrapper > h2:first-child,
-body.fortigate .default-content-wrapper > h2:only-child,
-body.fortigate .default-content-wrapper > p.button-container {
-  text-align: left;
+body.fortigate .default-content-wrapper > h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin-top: 12px;
+  background: #da291c;
+  border-radius: 2px;
 }
 
-/* Hero – green background, left-aligned text, buttons side-by-side */
-body.fortigate main > .section:first-child {
-  background-color: var(--fg-green);
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  position: relative;
-}
+/* FortiGate cards – flat icon grid (Features & Benefits, Use Cases) */
 
-body.fortigate main > .section:first-child > div {
-  max-width: var(--fg-content-max-width);
-  margin: 0 auto;
-  padding: 50px 15px 60px;
-}
-
-body.fortigate main > .section:first-child * {
-  color: #fff;
-}
-
-body.fortigate main > .section:first-child h1 {
-  font-size: 45px;
-  font-weight: 700;
-  line-height: 55px;
-  margin-bottom: 16px;
-  max-width: 66%;
-  text-align: left;
-}
-
-body.fortigate main > .section:first-child p {
-  font-size: 18px;
-  line-height: 1.3;
-  text-align: left;
-}
-
-body.fortigate main > .section:first-child .button-container {
-  display: inline-block;
-  margin-right: 20px;
-  margin-bottom: 12px;
-}
-
-body.fortigate main > .section:first-child a.button:any-link {
-  background-color: #fff;
-  color: #000;
-  border: 2px solid #fff;
-  border-radius: var(--fg-radius-pill);
-  padding: 15px 30px;
-  font-size: 15px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: none;
-  background-image: none;
-  display: inline-block;
-}
-
-body.fortigate main > .section:first-child a.button:any-link:hover {
-  opacity: 0.85;
-}
-
-body.fortigate main > .section:first-child .button-container + .button-container a.button:any-link {
-  background-color: transparent;
-  color: #fff;
-  border: 2px solid #fff;
-}
-
-/* Trailing links (bold arrow links) */
-body.fortigate .default-content-wrapper a:not(.button):any-link {
-  color: #000;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-body.fortigate .default-content-wrapper a:not(.button):any-link:hover {
-  text-decoration: underline;
-}
-
-
-/* Accordion block – fortigate overrides */
-body.fortigate .accordion-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--fg-text-body);
-  border-left: 5px solid transparent;
-  padding-left: 20px;
-}
-
-body.fortigate details[open] .accordion-title {
-  border-left-color: var(--fg-tab-border-active);
-}
-
-body.fortigate .accordion-body {
-  padding-left: 25px;
-  color: var(--fg-text-body);
-}
-
-/* Cards block – feature/benefit style (centered icons, uppercase titles) */
 body.fortigate .cards > ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
   list-style: none;
   padding: 0;
   margin: 0;
-  max-width: none;
 }
 
 body.fortigate .cards > ul > li {
-  text-align: center;
-  padding: 40px 10px;
-  flex: 1 1 0;
-  min-width: 0;
+  background: none;
   border: none;
-  box-shadow: none;
-  background: transparent;
   border-radius: 0;
-  overflow: visible;
+  box-shadow: none;
+  text-align: center;
+  padding: 24px 8px;
 }
 
 body.fortigate .cards > ul > li:hover {
@@ -225,8 +48,8 @@ body.fortigate .cards .cards-card-image {
 }
 
 body.fortigate .cards .cards-card-image img {
-  width: 80px;
-  height: 80px;
+  width: 72px;
+  height: 72px;
   object-fit: contain;
 }
 
@@ -234,367 +57,31 @@ body.fortigate .cards .cards-card-body {
   padding: 0;
 }
 
-body.fortigate .cards .cards-card-body p:first-child {
+body.fortigate .cards .cards-card-body p strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #333;
   margin-bottom: 8px;
 }
 
-body.fortigate .cards .cards-card-body p strong {
-  font-size: 15px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--fg-text-body);
-}
-
-body.fortigate .cards .cards-card-body p:not(:first-child) {
-  font-size: 15px;
-  color: var(--fg-text-body);
-  line-height: 1.4;
-}
-
-/* Table block styling */
-body.fortigate .table table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 15px;
-}
-
-body.fortigate .table thead th {
-  background-color: var(--fg-bg-gray);
-  color: var(--fg-text-body);
-  padding: 20px 25px;
-  font-weight: 700;
-  text-align: left;
-}
-
-body.fortigate .table tbody td {
-  padding: 20px 25px;
-  text-align: center;
-  border-bottom: 1px solid #eee;
-}
-
-body.fortigate .table tbody td:first-child {
-  text-align: left;
-}
-
-body.fortigate .table tbody tr:nth-child(even) {
-  background-color: #fafafa;
-}
-
-/* Dark section (FortiCare Support) */
-body.fortigate main > .section.dark {
-  background-color: var(--fg-bg-light);
-  padding: var(--fg-section-padding);
-  margin: 0;
-}
-
-body.fortigate main > .section.dark > div {
-  max-width: var(--fg-content-max-width);
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-/* Highlight section (Outbreak Alerts banner) */
-body.fortigate main > .section.highlight {
-  background-color: var(--fg-green-dark);
-  border-radius: var(--fg-radius-sm);
-  padding: 40px 48px;
-  margin: 32px auto;
-  max-width: var(--fg-content-max-width);
-  background-image:
-    radial-gradient(circle, rgb(255 255 255 / 20%) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-body.fortigate main > .section.highlight > div {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-
-body.fortigate main > .section.highlight * {
-  color: #fff;
-}
-
-body.fortigate main > .section.highlight h3 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 12px;
-  margin-top: 0;
-}
-
-body.fortigate main > .section.highlight h2::after {
-  display: none;
-}
-
-body.fortigate main > .section.highlight .default-content-wrapper p {
-  font-size: 16px;
-  line-height: 20px;
-}
-
-body.fortigate main > .section.highlight .default-content-wrapper {
-  flex: 1;
-}
-
-body.fortigate main > .section.highlight .default-content-wrapper .button-container a.button:any-link,
-body.fortigate main > .section.highlight .teaser-wrapper .button-container a.button:any-link {
-  background-color: #fff;
-  color: var(--fg-text-body);
-  border: none;
-  border-radius: 10px;
-  padding: 20px 32px;
-  font-weight: 700;
-  font-size: 15px;
-  box-shadow: none;
-  background-image: none;
-  white-space: nowrap;
-}
-
-body.fortigate main > .section.highlight .default-content-wrapper .button-container a.button:any-link:hover,
-body.fortigate main > .section.highlight .teaser-wrapper .button-container a.button:any-link:hover {
-  background-color: rgb(255 255 255 / 90%);
-  color: var(--fg-text-body);
-}
-
-body.fortigate main > .section.highlight .button-container {
-  flex-shrink: 0;
-}
-
-/* Secondary button style (outline) */
-body.fortigate .section a.button.secondary:any-link {
-  background-color: transparent;
-  border: 2px solid var(--fg-text-body);
-  color: var(--fg-text-body);
-  border-radius: 0;
-  padding: 18px 30px;
-  font-weight: 700;
-  box-shadow: none;
-  background-image: none;
-}
-
-body.fortigate .section a.button.secondary:any-link:hover {
-  background-color: var(--fg-text-body);
-  color: #fff;
-}
-
-/* Use Cases cards – horizontal icon-left layout, 3 columns */
-body.fortigate .section:nth-of-type(6) .cards > ul {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px 60px;
-}
-
-body.fortigate .section:nth-of-type(6) .cards > ul > li {
-  text-align: left;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-body.fortigate .section:nth-of-type(6) .cards .cards-card-image {
-  flex-shrink: 0;
-  margin-bottom: 0;
-}
-
-body.fortigate .section:nth-of-type(6) .cards .cards-card-image img {
-  width: 50px;
-  height: 50px;
-}
-
-body.fortigate .section:nth-of-type(6) .cards .cards-card-body p strong {
-  text-transform: uppercase;
+body.fortigate .cards .cards-card-body p {
   font-size: 14px;
-}
-
-/* Security service cards – carousel with arrows and progress */
-body.fortigate .section:nth-of-type(n+8) .cards-wrapper {
-  position: relative;
-}
-
-body.fortigate .section:nth-of-type(n+8) .cards > ul {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 24px;
-  justify-content: flex-start;
-  padding-bottom: 0;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-
-body.fortigate .section:nth-of-type(n+8) .cards > ul::-webkit-scrollbar {
-  display: none;
-}
-
-body.fortigate .section:nth-of-type(n+8) .cards > ul > li {
-  flex: 0 0 calc(33.33% - 16px);
-  min-width: 300px;
-  border: 1px dashed #ccc;
-  background: #fff;
-  text-align: center;
-  padding: 40px 24px 32px;
-  border-radius: 0;
-  overflow: hidden;
-  scroll-snap-align: start;
-  box-shadow: none;
-  height: auto;
-}
-
-body.fortigate .section:nth-of-type(n+8) .cards > ul > li:hover {
-  transform: none;
-  box-shadow: none;
-}
-
-body.fortigate .section:nth-of-type(n+8) .cards .cards-card-image {
-  margin-bottom: 24px;
-  justify-content: center;
-}
-
-body.fortigate .section:nth-of-type(n+8) .cards .cards-card-image img {
-  width: 80px;
-  height: 80px;
+  line-height: 1.5;
+  color: #555;
   margin: 0;
-}
-
-body.fortigate .section:nth-of-type(n+8) .cards .cards-card-body {
-  padding: 0;
-}
-
-body.fortigate .section:nth-of-type(n+8) .cards .cards-card-body p strong {
-  font-size: 18px;
-  font-weight: 600;
-  text-transform: none;
-}
-
-body.fortigate .section:nth-of-type(n+8) .cards .cards-card-body p:not(:first-child) {
-  font-size: 15px;
-  color: var(--fg-text-dark);
-  line-height: 20px;
-}
-
-/* Carousel navigation (arrows + progress line) */
-body.fortigate .carousel-nav {
-  display: flex;
-  align-items: center;
-  margin-top: 24px;
-  gap: 12px;
-}
-
-body.fortigate .carousel-nav button {
-  background: none;
-  border: none;
-  font-size: 32px;
-  color: var(--fg-text-body);
-  cursor: pointer;
-  padding: 8px;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-body.fortigate .carousel-nav button:hover {
-  color: #da291c;
-}
-
-body.fortigate .carousel-progress {
-  flex: 1;
-  height: 4px;
-  background-color: #dcdcdc;
-  position: relative;
-  border-radius: 2px;
-}
-
-body.fortigate .carousel-progress-bar {
-  height: 100%;
-  background-color: #da291c;
-  border-radius: 2px;
-  transition: width 0.3s;
-}
-
-/* Resources cards – solid border, image top, left-aligned text, centered arrows */
-body.fortigate .section.cards-container:nth-of-type(11) .cards > ul > li {
-  border: 1px solid #e5e5e5;
-  text-align: left;
-  padding: 0;
-  flex: 0 0 calc(33.33% - 16px);
-  display: flex;
-  flex-direction: column;
-}
-
-body.fortigate .section:nth-of-type(11) .cards .cards-card-image {
-  margin-bottom: 0;
-  justify-content: stretch;
-}
-
-body.fortigate .section:nth-of-type(11) .cards .cards-card-image img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  margin: 0;
-}
-
-body.fortigate .section:nth-of-type(11) .cards .cards-card-body {
-  padding: 24px;
-  flex: 1;
-}
-
-body.fortigate .section:nth-of-type(11) .cards .cards-card-body p:first-child strong {
-  font-size: 16px;
-  text-transform: none;
-  color: #1a7a5c;
-}
-
-body.fortigate .section:nth-of-type(11) .cards .cards-card-body p:not(:first-child) {
-  font-size: 15px;
-  color: var(--fg-text-body);
-  line-height: 1.4;
-  text-align: left;
-}
-
-body.fortigate .section:nth-of-type(11) .carousel-nav {
-  justify-content: center;
-}
-
-body.fortigate .section:nth-of-type(11) .carousel-progress {
-  display: none;
-}
-
-/* Table overflow for mobile */
-body.fortigate .table-wrapper {
-  overflow-x: auto;
 }
 
 @media (width <= 899px) {
-  body.fortigate main > .section:first-child h1 {
-    font-size: 32px;
-    line-height: 40px;
-    max-width: 100%;
-  }
-
-  body.fortigate main > .section:first-child .button-container {
-    display: block;
-    margin-right: 0;
-  }
-
-  body.fortigate h2 {
-    font-size: 26px;
-    line-height: 34px;
-  }
-
-  body.fortigate .cards > ul > li {
-    flex: 0 1 50%;
+  body.fortigate .cards > ul {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (width >= 900px) {
-  body.fortigate .cards > ul > li {
-    flex: 0 1 33.33%;
-  }
-}
-
-@media (width >= 1200px) {
-  body.fortigate .cards > ul > li {
-    flex: 1 1 0;
+@media (width <= 599px) {
+  body.fortigate .cards > ul {
+    grid-template-columns: 1fr;
   }
 }

@@ -19,7 +19,7 @@ function buildMegamenu(subUl) {
 
   const categories = [...subUl.children];
   categories.forEach((cat, idx) => {
-    const catLink = cat.querySelector(':scope > a');
+    const catLink = cat.querySelector(':scope > a') || cat.querySelector(':scope > p > a');
     const catSub = cat.querySelector(':scope > ul');
 
     const sideItem = document.createElement('li');
@@ -217,7 +217,7 @@ export default async function decorate(block) {
 
   if (mainList) {
     [...mainList.children].forEach((li) => {
-      const link = li.querySelector(':scope > a');
+      const link = li.querySelector(':scope > a') || li.querySelector(':scope > p > a');
       const subUl = li.querySelector(':scope > ul');
 
       const item = document.createElement('div');

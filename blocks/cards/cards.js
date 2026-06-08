@@ -285,8 +285,13 @@ function decorateTestimonial(block) {
   });
 
   const logos = createTag('div', { class: 'testimonial-logos' });
-  stories.forEach((_, i) => {
+  stories.forEach((row, i) => {
     const btn = createTag('button', { class: 'testimonial-logo-btn', 'aria-label': `Story ${i + 1}` });
+    const title = row.querySelector('strong');
+    if (title) {
+      const name = title.textContent.split(/\s+(Boosts|Streamlines|Provides|Enhances|Leading)/)[0].trim();
+      btn.textContent = name;
+    }
     if (i === 0) btn.classList.add('active');
     btn.addEventListener('click', () => {
       container.querySelector('.testimonial-slide.active')?.classList.remove('active');

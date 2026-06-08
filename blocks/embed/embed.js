@@ -91,7 +91,27 @@ const loadEmbed = (block, link, autoplay, fixedHeight) => {
   block.classList.add('embed-is-loaded');
 };
 
+function decorateLink(block) {
+  const anchor = block.querySelector('a');
+  const text = anchor.textContent.trim();
+  const { href } = anchor;
+  block.textContent = '';
+
+  const btn = document.createElement('a');
+  btn.href = href;
+  btn.className = 'embed-link-btn';
+  btn.target = '_blank';
+  btn.rel = 'noopener noreferrer';
+  btn.innerHTML = `<span class="embed-link-icon"></span><span class="embed-link-text">${text}</span>`;
+  block.append(btn);
+}
+
 export default function decorate(block) {
+  if (block.classList.contains('link')) {
+    decorateLink(block);
+    return;
+  }
+
   const placeholder = block.querySelector('picture');
   const link = block.querySelector('a').href;
   const fixedHeight = getFixedHeight(block);
